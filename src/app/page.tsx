@@ -8,9 +8,9 @@ import ArrowLink from '@/components/links/ArrowLink';
 import ButtonLink from '@/components/links/ButtonLink';
 import UnderlineLink from '@/components/links/UnderlineLink';
 
-import Converter from '@/app/components/converter';
 import { NavBar } from '@/app/components/navBar';
-import CryptoConverter from '@/app/components/cryptoConverter';
+import { Converter } from '@/app/components/converter';
+import { CryptoConverter } from '@/app/components/cryptoConverter';
 
 export default function HomePage() {
 
@@ -18,9 +18,9 @@ export default function HomePage() {
 
   return (
     <main>
-      <Head>
+      {/* <Head>
         <title>Hello</title>
-      </Head>
+      </Head> */}
       <section className='bg-indigo-950'>
         <div className='layout relative flex min-h-screen flex-col items-center justify-center py-12 text-center'>
 
@@ -30,7 +30,7 @@ export default function HomePage() {
 
             <NavBar selectMenu={selectMenu} setSelectMenu={setSelectMenu} />
 
-            {selectMenu == "currency" ? <Converter /> : <CryptoConverter />}
+            {selectMenu == "currency" ? <Converter selectMenu={selectMenu} /> : <CryptoConverter selectMenu={selectMenu} />}
 
 
 

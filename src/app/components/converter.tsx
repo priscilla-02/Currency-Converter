@@ -11,8 +11,12 @@ export interface IConversion {
   targetCurrency: string;
 }
 
+export interface IConverterProps {
+  selectMenu: string
+}
 
-export default function Converter() {
+
+export const Converter: React.FC<IConverterProps> = ({ selectMenu }) => {
   const [currencyList, setCurrencyList] = useState<string[]>([])
   const [clickBaseCurrencyMenu, setClickBaseCurrencyMenu] = useState<boolean>(false)
   const [clickTargetCurrencyMenu, setClickTargetCurrencyMenu] = useState<boolean>(false)
@@ -55,7 +59,7 @@ export default function Converter() {
         const formattedTimeUpdated = formattedDate + " " + formattedTime + " UTC"
         setTimeUpdated(formattedTimeUpdated)
 
-        const convertedAmount = conversion.baseAmount * rate
+        const convertedAmount = +(conversion.baseAmount * rate).toFixed(2)
         setConversion(prevConversion => ({
           ...prevConversion,
           targetAmount: convertedAmount
@@ -73,7 +77,7 @@ export default function Converter() {
 
 
   return (
-    <InputContainer errMsg={errMsg} currencyList={currencyList} conversionRate={conversionRate} conversion={conversion} clickBaseCurrencyMenu={clickBaseCurrencyMenu} clickTargetCurrencyMenu={clickTargetCurrencyMenu} setConversion={setConversion} setClickTargetCurrencyMenu={setClickTargetCurrencyMenu} timeUpdated={timeUpdated} setClickBaseCurrencyMenu={setClickBaseCurrencyMenu} />
+    <InputContainer selectMenu={selectMenu} errMsg={errMsg} currencyList={currencyList} conversionRate={conversionRate} conversion={conversion} clickBaseCurrencyMenu={clickBaseCurrencyMenu} clickTargetCurrencyMenu={clickTargetCurrencyMenu} setConversion={setConversion} setClickTargetCurrencyMenu={setClickTargetCurrencyMenu} timeUpdated={timeUpdated} setClickBaseCurrencyMenu={setClickBaseCurrencyMenu} />
     // <InputContainer currencyList={currencyList} conversionRate={conversionRate} conversion={conversion} clickBaseCurrencyMenu={clickBaseCurrencyMenu} clickTargetCurrencyMenu={clickTargetCurrencyMenu} setConversion={setConversion} setClickBaseCurrencyMenu-={setClickBaseCurrencyMenu} setClickTargetCurrencyMenu={setClickTargetCurrencyMenu} timeUpdated={timeUpdated} />
     // <section className="px-8 pt-6 pb-8 mb-4 ">
     //   {(currencyList.length > 0 && conversionRate !== 0) ? (
