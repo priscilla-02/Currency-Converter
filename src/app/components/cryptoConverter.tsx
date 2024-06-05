@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { fetchCrypto } from "@/app/api/hello/conversionRate";
-import InputContainer from "@/components/input/InputContainer";
+
 import { IConversion, IConverterProps } from "@/app/components/converter";
+import InputContainer from "@/app/components/input/InputContainer";
 
 export interface ICurrency {
   id: string,

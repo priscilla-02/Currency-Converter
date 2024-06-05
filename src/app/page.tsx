@@ -1,14 +1,14 @@
 'use client';
-
 import Head from 'next/head';
 import * as React from 'react';
 import '@/lib/env';
-
 import ArrowLink from '@/components/links/ArrowLink';
 import ButtonLink from '@/components/links/ButtonLink';
 import UnderlineLink from '@/components/links/UnderlineLink';
 
+
 import { NavBar } from '@/app/components/navBar';
+
 import { Converter } from '@/app/components/converter';
 import { CryptoConverter } from '@/app/components/cryptoConverter';
 
@@ -18,9 +18,9 @@ export default function HomePage() {
 
   return (
     <main>
-      {/* <Head>
+      <Head>
         <title>Hello</title>
-      </Head> */}
+      </Head>
       <section className='bg-indigo-950'>
         <div className='layout relative flex min-h-screen flex-col items-center justify-center py-12 text-center'>
 
@@ -30,23 +30,20 @@ export default function HomePage() {
 
             <NavBar selectMenu={selectMenu} setSelectMenu={setSelectMenu} />
 
+
             {selectMenu == "currency" ? <Converter selectMenu={selectMenu} /> : <CryptoConverter selectMenu={selectMenu} />}
 
 
 
           </form>
-
-
           <p className='mt-2 text-sm text-white'>
             <ArrowLink href='https://github.com/priscilla-02'>
               See the repository
             </ArrowLink>
           </p>
-
           <ButtonLink className='mt-6' href='/components' variant='light'>
             See all components
           </ButtonLink>
-
           <footer className='absolute bottom-2 text-white'>
             © {new Date().getFullYear()} By{' '}
             <UnderlineLink href='https://github.com/priscilla-02'>
@@ -55,6 +52,6 @@ export default function HomePage() {
           </footer>
         </div>
       </section>
-    </main>
+    </main >
   );
 }

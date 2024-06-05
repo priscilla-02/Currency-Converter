@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { fetchCurrencies, fetchRates } from "@/app/api/hello/conversionRate";
-import InputContainer from "@/components/input/InputContainer";
+import InputContainer from "@/app/components/input/InputContainer";
 import errorMap from "zod/lib/locales/en";
 
 
