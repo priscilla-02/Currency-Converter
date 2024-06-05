@@ -33,7 +33,10 @@ export const CryptoConverter: React.FC<IConverterProps> = ({ selectMenu }) => {
         const cryptoData = await fetchCrypto(conversion.baseCurrency);
 
         const filteredCrypto = cryptoData.map(({ id, symbol, name, image, current_price }: ICurrency) => ({ id, symbol, name, image, current_price }))
-        setCurrencyList(filteredCrypto)
+
+        setTimeout(() => {
+          setCurrencyList(filteredCrypto)
+        }, 5000);
 
         const currencyPrice = filteredCrypto.find((currency: any) => currency.symbol === conversion.targetCurrency.toLowerCase())
         if (currencyPrice) {

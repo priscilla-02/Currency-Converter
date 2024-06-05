@@ -215,14 +215,16 @@ const InputContainer: React.FC<InputContainerProps> = (
                   <p>Last updated at {timeUpdated} </p>
                 </>
               ) : (<>
-                <p>{conversion.baseCurrency} to {conversion.targetCurrency} is 1:  <b>{conversionRate}</b></p>
+                <p> 1 <b>{conversion.baseCurrency}</b> = {conversionRate} <b>{conversion.targetCurrency} </b></p>
               </>)}
 
             </div>
           )}</div>
 
       ) : (
-        <div>Loading...</div>
+        <div className="h-[150px]">
+          <div className="load-man"></div>
+        </div>
       )}
     </section>
   )

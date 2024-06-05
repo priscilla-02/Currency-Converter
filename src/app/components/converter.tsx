@@ -35,7 +35,9 @@ export const Converter: React.FC<IConverterProps> = ({ selectMenu }) => {
         const currencies = await fetchCurrencies();
         const filteredCurrencies = currencies.filter((currency: string) => !["MOP", "SLE", "XAF", "XCD", "XDR", "XPF", "MOP"].includes(currency[0]));
 
-        setCurrencyList(filteredCurrencies)
+        setTimeout(() => {
+          setCurrencyList(filteredCurrencies)
+        }, 5000);
 
       } catch (error) {
         console.error('Error fetching currencies:', error);
