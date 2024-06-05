@@ -1,12 +1,13 @@
 import axios from 'axios';
 
 const APIKey = "46de1989f233ede36bcd3627"
+const APIKey2 = "3ba75713e6ac738ce21fb2e4"
 
-const APIKeyCrypto = "CG-eaozVQzAT4pLbNhSqF7CKUss"
+// const APIKeyCrypto = "CG-eaozVQzAT4pLbNhSqF7CKUss"
 
 export async function fetchCurrencies() {
   try {
-    const response = await axios.get(`https://v6.exchangerate-api.com/v6/${APIKey}/codes`);
+    const response = await axios.get(`https://v6.exchangerate-api.com/v6/${APIKey2}/codes`);
     return response.data.supported_codes;
   } catch (error) {
     console.error('Error fetching currencies:', error);
@@ -16,24 +17,13 @@ export async function fetchCurrencies() {
 
 export async function fetchRates(baseCurrency: string, targetCurrency: string) {
   try {
-    const response = await axios.get(`https://v6.exchangerate-api.com/v6/${APIKey}/pair/${baseCurrency}/${targetCurrency}`);
+    const response = await axios.get(`https://v6.exchangerate-api.com/v6/${APIKey2}/pair/${baseCurrency}/${targetCurrency}`);
     return response.data;
   } catch (error) {
     console.error('Error fetching conversion rate:', error);
     throw error;
   }
 }
-
-
-// export async function fetchCrypto() {
-//   try {
-//     const response = await axios.get(`https://api.coingecko.com/api/v3/simple/supported_vs_currencies`);
-//     return response.data;
-//   } catch (error) {
-//     console.error('Error fetching cryptocurrency coin list data:', error);
-//     throw error;
-//   }
-// }
 
 
 export async function fetchCrypto(baseCurrency: string) {

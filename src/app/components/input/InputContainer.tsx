@@ -3,6 +3,7 @@ import { currenciesFlags } from "@/app/utils/currenciesFlags";
 import ArrowUpDown from "../../../../public/svg/ArrowUpDown.svg"
 import ArrowRightLeft from "../../../../public/svg/ArrowRightLeft.svg"
 import { SetStateAction } from "react";
+import { flatCurrencyList } from "@/app/utils/flatCurrencyList";
 
 interface InputContainerProps {
   selectMenu: string;
@@ -99,14 +100,27 @@ const InputContainer: React.FC<InputContainerProps> = (
                   {clickBaseCurrencyMenu && (
                     <div className="w-full absolute right-0 z-10 mt-2 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none overflow-y-auto max-h-60" role="menu" aria-orientation="vertical">
                       <div className="py-1" role="none">
-                        {currencyList.map((currency: any) => (
-                          <div className="flex justify-center cursor-pointer hover:bg-gray-300">
-                            <img src={currenciesFlags.find(currenciesFlags => currenciesFlags.code === currency[0])?.flag} className="w-[32px] h-[32]" />
-                            <div key={currency[0]} className="text-gray-700 block px-4 py-2 text-sm" role="menuitem" onClick={() => handleCurrencySelect(currency[0], true)}>
-                              {currency[0]}
+
+                        {selectMenu == "currency" ? (<>
+                          {currencyList.map((currency: string) => (
+                            <div className="flex justify-center cursor-pointer hover:bg-gray-300">
+                              <img src={currenciesFlags.find(currenciesFlags => currenciesFlags.code === currency[0])?.flag} className="w-[32px] h-[32]" />
+                              <div key={currency[0]} className="text-gray-700 block px-4 py-2 text-sm" role="menuitem" onClick={() => handleCurrencySelect(currency[0], true)}>
+                                {currency[0]}
+                              </div>
                             </div>
-                          </div>
-                        ))}
+                          ))}
+                        </>) : (<>
+                          {flatCurrencyList.map((currency: string) => (
+                            <div className="flex justify-center cursor-pointer hover:bg-gray-300">
+                              <img src={currenciesFlags.find(currenciesFlags => currenciesFlags.code === currency)?.flag} className="w-[32px]" />
+                              <div key={currency} className="text-gray-700 block px-4 py-2 text-sm" role="menuitem" onClick={() => handleCurrencySelect(currency, true)}>
+                                {currency}
+                              </div>
+                            </div>
+                          ))}
+                        </>)}
+
                       </div>
                     </div>
                   )}
@@ -139,8 +153,12 @@ const InputContainer: React.FC<InputContainerProps> = (
 
 
                   <button type="button" className="inline-flex w-full justify-center items-center gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-300 h-[50px]" id="menu-button" onClick={() => setClickTargetCurrencyMenu(prev => !prev)}>
-                    <div className="flex justify-center">
-                      <img src={currenciesFlags.find(currenciesFlags => currenciesFlags.code === conversion.targetCurrency)?.flag} className="mr-2 w-[32px] h-[21px]" />
+                    <div className="flex justify-center items-center cursor-pointer hover:bg-gray-300">
+                      {selectMenu == "currency" ? (
+                        <img src={currenciesFlags.find(currenciesFlags => currenciesFlags.code === conversion.targetCurrency)?.flag} className="mr-2 w-[32px] h-[21px]" />
+                      ) : (
+                        <img src={currencyList.find((currency: any) => currency.symbol.toUpperCase() === conversion.targetCurrency)?.image} className="mr-2 w-[32px] h-[32]" />
+                      )}
                       {conversion.targetCurrency}
                       <svg className="-mr-1 h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                         <path fillRule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clipRule="evenodd" />
@@ -153,14 +171,27 @@ const InputContainer: React.FC<InputContainerProps> = (
                   {clickTargetCurrencyMenu && (
                     <div className="w-full absolute right-0 z-10 mt-2 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none overflow-y-auto max-h-60" role="menu" aria-orientation="vertical">
                       <div className="py-1" role="none">
-                        {currencyList.map((currency: string) => (
-                          <div className="flex justify-center">
-                            <img src={currenciesFlags.find(currenciesFlags => currenciesFlags.code === currency[0])?.flag} className="w-[32px]" />
-                            <div key={currency[0]} className="text-gray-700 block px-4 py-2 text-sm" role="menuitem" onClick={() => handleCurrencySelect(currency[0], false)}>
-                              {currency[0]}
+                        {selectMenu == "currency" ? (<>
+
+                          {currencyList.map((currency: string) => (
+                            <div className="flex justify-center cursor-pointer hover:bg-gray-300">
+                              <img src={currenciesFlags.find(currenciesFlags => currenciesFlags.code === currency[0])?.flag} className="w-[32px]" />
+                              <div key={currency[0]} className="text-gray-700 block px-4 py-2 text-sm" role="menuitem" onClick={() => handleCurrencySelect(currency[0], false)}>
+                                {currency[0]}
+                              </div>
                             </div>
-                          </div>
-                        ))}
+                          ))}
+                        </>) : (<>
+                          {currencyList.map((currency: any) => (
+                            <div className="flex justify-center cursor-pointer hover:bg-gray-300" key={currency.id}>
+                              <img src={currency.image} className="w-[32px] h-[32]" />
+                              <div key={currency.id} className="text-gray-700 block px-4 py-2 text-sm" role="menuitem" onClick={() => handleCurrencySelect(currency.symbol.toUpperCase(), false)}>
+                                {currency.symbol.toUpperCase()}
+                              </div>
+                            </div>
+                          ))}
+                        </>)}
+
                       </div>
                     </div>
                   )}

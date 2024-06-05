@@ -2,9 +2,9 @@
 import Head from 'next/head';
 import * as React from 'react';
 import '@/lib/env';
-import ArrowLink from '@/components/links/ArrowLink';
-import ButtonLink from '@/components/links/ButtonLink';
-import UnderlineLink from '@/components/links/UnderlineLink';
+import ArrowLink from '@/reusable/links/ArrowLink';
+import ButtonLink from '@/reusable/links/ButtonLink';
+import UnderlineLink from '@/reusable/links/UnderlineLink';
 
 
 import { NavBar } from '@/app/components/navBar';
@@ -19,7 +19,7 @@ export default function HomePage() {
   return (
     <main>
       <Head>
-        <title>Hello</title>
+        <title>Currency Converter</title>
       </Head>
       <section className='bg-indigo-950'>
         <div className='layout relative flex min-h-screen flex-col items-center justify-center py-12 text-center'>
@@ -27,15 +27,10 @@ export default function HomePage() {
           <h1 className='my-4  text-white'>CURRENCY CONVERTER</h1>
 
           <form className="w-full max-w-4xl bg-gray-200 rounded-xl shadow-md border-4 border-purple-400 flex-col justify-center items-center">
-
             <NavBar selectMenu={selectMenu} setSelectMenu={setSelectMenu} />
-
-
             {selectMenu == "currency" ? <Converter selectMenu={selectMenu} /> : <CryptoConverter selectMenu={selectMenu} />}
-
-
-
           </form>
+
           <p className='mt-2 text-sm text-white'>
             <ArrowLink href='https://github.com/priscilla-02'>
               See the repository
