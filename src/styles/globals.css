@@ -117,70 +117,54 @@
     background-size: 0 2px, 100% 2px;
   }
 
+/* Loading:Merge */
+@-webkit-keyframes grow {
+  0%, 100% {
+    -webkit-transform: scale(1);
+            transform: scale(1); }
+  50% {
+    -webkit-transform: scale(0.25);
+            transform: scale(0.25); } }
+@keyframes grow {
+  0%, 100% {
+    -webkit-transform: scale(1);
+            transform: scale(1); }
+  50% {
+    -webkit-transform: scale(0.25);
+            transform: scale(0.25); } }
 
-  /* Loading */
-  .load-man {
-    -webkit-animation: load-man-travel 1.2s infinite linear;
-            animation: load-man-travel 1.2s infinite linear;
-    background: repeating-linear-gradient(90deg, #c084fc, #c084fc 5%, transparent 5%, transparent 35%);
-    height: 20px;
-    left: 50%;
-    margin-top: -5px;
+.merge {
+  -webkit-animation: spin 1.33333s infinite linear;
+          animation: spin 1.33333s infinite linear;
+  height: 10px;
+  position: relative;
+  width: 20px; 
+}
+  .merge:after, .merge:before {
+    content: '';
+    height: 40px;
+    width: 40px;
+    -webkit-animation: grow 2s infinite ease backwards;
+            animation: grow 2s infinite ease backwards;
+    border-radius: 100%;
+    background: #1e1b4b;
+    opacity: 0.75;
     position: absolute;
-    top: 50%;
-    width: 200px;
-    }
-    .load-man:after, .load-man:before {
-      content: '';
-      position: absolute;
-      left: -25px;
-      top: 50%;
-      border: 25px solid #1e1b4b;
-      border-radius: 100%;
-      margin-top: -25px; }
-    .load-man:before {
-      --close: -90;
-      -webkit-animation: load-man-chomp 0.35s infinite linear;
-              animation: load-man-chomp 0.35s infinite linear;
-      border-bottom-color: transparent;
-      border-left-color: transparent; }
-    .load-man:after {
-      --close: 0;
-      -webkit-animation: load-man-chomp 0.35s infinite linear;
-              animation: load-man-chomp 0.35s infinite linear;
-      border-right-color: transparent;
-      border-top-color: transparent; }
-  
-  @-webkit-keyframes load-man-travel {
-    to {
-      background-position: -200px 0; } }
-  
-  @keyframes load-man-travel {
-    to {
-      background-position: -200px 0; } }
-  
-  @-webkit-keyframes load-man-chomp {
-    0% {
-      -webkit-transform: rotate(-45deg);
-              transform: rotate(-45deg); }
-    50% {
-      -webkit-transform: rotate(calc(var(--close) * 1deg));
-              transform: rotate(calc(var(--close) * 1deg)); }
-    100% {
-      -webkit-transform: rotate(-45deg);
-              transform: rotate(-45deg); } }
-  
-  @keyframes load-man-chomp {
-    0% {
-      -webkit-transform: rotate(-45deg);
-              transform: rotate(-45deg); }
-    50% {
-      -webkit-transform: rotate(calc(var(--close) * 1deg));
-              transform: rotate(calc(var(--close) * 1deg)); }
-    100% {
-      -webkit-transform: rotate(-45deg);
-              transform: rotate(-45deg); } }
+    -webkit-transform-origin: -200% -80%;
+            transform-origin: -200% -80%; }
+  .merge:before {
+    background: #c084fc;
+    -webkit-transform-origin: 200% 80%;
+            transform-origin: 200% 80%; }
 
+@-webkit-keyframes spin {
+  to {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg); } }
 
+@keyframes spin {
+  to {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg); } }
 
 }
