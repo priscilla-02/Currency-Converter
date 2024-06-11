@@ -1,5 +1,3 @@
-import { useState } from "react";
-
 interface NavBarProps {
   selectMenu: string
   setSelectMenu: React.Dispatch<React.SetStateAction<"currency" | "crypto">>;

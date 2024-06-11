@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const APIKey = "46de1989f233ede36bcd3627"
+// const APIKey = "46de1989f233ede36bcd3627"
 const APIKey2 = "3ba75713e6ac738ce21fb2e4"
 
 // const APIKeyCrypto = "CG-eaozVQzAT4pLbNhSqF7CKUss"

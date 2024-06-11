@@ -19,7 +19,7 @@ export const Converter: React.FC<IConverterProps> = ({ selectMenu }) => {
   const [clickBaseCurrencyMenu, setClickBaseCurrencyMenu] = useState<boolean>(false)
   const [clickTargetCurrencyMenu, setClickTargetCurrencyMenu] = useState<boolean>(false)
   const [conversionRate, setConversionRate] = useState<number>(0)
-  const [timeUpdated, setTimeUpdated] = useState<any>("")
+  const [timeUpdated, setTimeUpdated] = useState<string>("")
   const [conversion, setConversion] = useState<IConversion>({
     baseAmount: 10.00,
     baseCurrency: "GBP",

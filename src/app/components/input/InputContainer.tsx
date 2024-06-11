@@ -12,8 +12,8 @@ interface InputContainerProps {
   currencyList: any;
   conversionRate: number;
   conversion: IConversion;
-  clickBaseCurrencyMenu: Boolean
-  clickTargetCurrencyMenu: Boolean
+  clickBaseCurrencyMenu: boolean;
+  clickTargetCurrencyMenu: boolean;
   setConversion: React.Dispatch<SetStateAction<IConversion>>
   setClickTargetCurrencyMenu: React.Dispatch<SetStateAction<boolean>>
   setClickBaseCurrencyMenu: React.Dispatch<SetStateAction<boolean>>
@@ -174,10 +174,12 @@ const InputContainer: React.FC<InputContainerProps> = (
                           </>) : (<>
                             {currencyList.map((currency: any) => (
                               <div className="flex justify-center cursor-pointer hover:bg-gray-300" key={currency.id}>
+
                                 <img src={currency.image} className="w-[32px] h-[32]" />
                                 <div key={currency.id} className="text-gray-700 block px-4 py-2 text-sm" role="menuitem" onClick={() => handleCurrencySelect(currency.symbol.toUpperCase(), false)}>
                                   {currency.symbol.toUpperCase()}
                                 </div>
+
                               </div>
                             ))}
                           </>)}
