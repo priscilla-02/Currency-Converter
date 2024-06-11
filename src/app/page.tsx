@@ -19,7 +19,7 @@ export default function HomePage() {
       <section className='bg-indigo-950'>
         <div className='layout relative flex min-h-screen flex-col items-center justify-center py-12 text-center'>
 
-          <h1 className='my-4 text-white'>Currency Converter</h1>
+          <h1 className='my-4 text-white'>Currency Converter Test</h1>
 
           <form className="w-full max-w-4xl bg-gray-200 rounded-xl shadow-md border-4 border-purple-400 flex-col justify-center items-center">
             <NavBar selectMenu={selectMenu} setSelectMenu={setSelectMenu} />
