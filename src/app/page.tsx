@@ -14,7 +14,7 @@ export default function HomePage() {
   return (
     <main>
       <Head>
-        <title>Currency Converter</title>
+        <title>Currency Converter Test</title>
       </Head>
       <section className='bg-indigo-950'>
         <div className='layout relative flex min-h-screen flex-col items-center justify-center py-12 text-center'>
