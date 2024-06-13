@@ -175,8 +175,8 @@ const InputContainer: React.FC<InputContainerProps> = (
                             {currencyList.map((currency: any) => (
                               <div className="flex justify-center cursor-pointer hover:bg-gray-300 w-full" key={currency.id}>
 
-                                <img src={currency.image} className="flex w-[32px] h-[32]" />
-                                <div key={currency.id} className="flex text-gray-700 px-4 py-2 text-sm w-[75px]" role="menuitem" onClick={() => handleCurrencySelect(currency.symbol.toUpperCase(), false)}>
+                                <img src={currency.image} className="flex w-[32px] h-[32] pb-1" />
+                                <div key={currency.id} className="flex text-gray-700 px-4 py-2 text-sm w-[60px]" role="menuitem" onClick={() => handleCurrencySelect(currency.symbol.toUpperCase(), false)}>
                                   {currency.symbol.toUpperCase()}
                                 </div>
 
