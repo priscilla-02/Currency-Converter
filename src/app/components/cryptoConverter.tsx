@@ -17,6 +17,7 @@ export const CryptoConverter: React.FC<IConverterProps> = ({ selectMenu }) => {
   const [clickBaseCurrencyMenu, setClickBaseCurrencyMenu] = useState<boolean>(false)
   const [clickTargetCurrencyMenu, setClickTargetCurrencyMenu] = useState<boolean>(false)
   const [conversionRate, setConversionRate] = useState<number>(0)
+  const [timeUpdated, setTimeUpdated] = useState<string>("")
   const [conversion, setConversion] = useState<IConversion>({
     baseAmount: 10.00,
     baseCurrency: "GBP",
@@ -24,7 +25,6 @@ export const CryptoConverter: React.FC<IConverterProps> = ({ selectMenu }) => {
     targetCurrency: "BTC"
   })
   const [errMsg, setErrMsg] = useState<string | null>(null)
-
 
   useEffect(() => {
 
@@ -49,6 +49,13 @@ export const CryptoConverter: React.FC<IConverterProps> = ({ selectMenu }) => {
             targetAmount: convertedAmount
           }));
         }
+
+        const timeUpdated = new Date()
+        const date = timeUpdated.toLocaleDateString()
+        const time = timeUpdated.toLocaleTimeString();
+        const formattedTimeUpdated = date + " " + time + " UTC"
+        setTimeUpdated(formattedTimeUpdated)
+
       } catch (error) {
         console.error('Error fetching currencies:', error);
         setErrMsg("Don't get paid enough to afford the paid version.\nPlease try again another day :(")
@@ -60,6 +67,6 @@ export const CryptoConverter: React.FC<IConverterProps> = ({ selectMenu }) => {
   }, [conversion.baseCurrency, conversion.targetCurrency]);
 
   return (
-    <InputContainer selectMenu={selectMenu} errMsg={errMsg} currencyList={currencyList} conversionRate={conversionRate} conversion={conversion} clickBaseCurrencyMenu={clickBaseCurrencyMenu} clickTargetCurrencyMenu={clickTargetCurrencyMenu} setConversion={setConversion} setClickTargetCurrencyMenu={setClickTargetCurrencyMenu} setClickBaseCurrencyMenu={setClickBaseCurrencyMenu} />
+    <InputContainer selectMenu={selectMenu} errMsg={errMsg} currencyList={currencyList} conversionRate={conversionRate} conversion={conversion} clickBaseCurrencyMenu={clickBaseCurrencyMenu} clickTargetCurrencyMenu={clickTargetCurrencyMenu} setConversion={setConversion} setClickTargetCurrencyMenu={setClickTargetCurrencyMenu} timeUpdated={timeUpdated} setClickBaseCurrencyMenu={setClickBaseCurrencyMenu} />
   );
 }

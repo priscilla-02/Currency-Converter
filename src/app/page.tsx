@@ -7,6 +7,7 @@ import UnderlineLink from '@/reusable/links/UnderlineLink';
 import { NavBar } from '@/app/components/navBar';
 import { Converter } from '@/app/components/converter';
 import { CryptoConverter } from '@/app/components/cryptoConverter';
+import SavedList from '@/app/components/savedList';
 
 export default function HomePage() {
   const [selectMenu, setSelectMenu] = React.useState<"currency" | "crypto">("currency")
@@ -26,8 +27,12 @@ export default function HomePage() {
             {selectMenu == "currency" ? <Converter selectMenu={selectMenu} /> : <CryptoConverter selectMenu={selectMenu} />}
           </form>
 
+          <form className="my-10 min-h-[350px] w-full max-w-4xl bg-gray-200 rounded-xl shadow-md border-4 border-purple-400 flex-col">
+            <SavedList />
+          </form>
+
           <footer className='absolute bottom-2 text-white'>
-            © {new Date().getFullYear()} By{' '}
+            © 2024 By{' '}
             <UnderlineLink href='https://github.com/priscilla-02'>
               Priscilla Chan
             </UnderlineLink>

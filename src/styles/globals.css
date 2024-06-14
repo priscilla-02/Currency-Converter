@@ -29,8 +29,7 @@
 }
 
 @layer base {
-  inter var - latin 
-   @font-face {
+  inter var - latin @font-face {
     font-family: 'Inter';
     font-style: normal;
     font-weight: 100 900;
@@ -39,16 +38,16 @@
     unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
       U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212,
       U+2215, U+FEFF, U+FFFD;
-  } 
+  }
 
   .cursor-newtab {
     cursor: url('/images/new-tab.png') 10 10, pointer;
   }
 
   /* #region  /**=========== Typography =========== */
-  .h0 {
+  /* .h0 {
     @apply font-primary text-3xl font-bold md:text-5xl;
-  }
+  } */
 
   h1,
   .h1 {
@@ -74,6 +73,17 @@
   .p {
     @apply font-primary text-sm md:text-base;
   }
+
+  th,
+  .th {
+    @apply border border-gray-300 md:px-4 md:py-2 md:text-base px-1 py-1 text-xs;
+  }
+
+  td,
+  .td {
+    @apply border border-gray-300 md:px-2 md:py-2 md:text-base px-1 text-xs;
+  }
+
   /* #endregion  /**======== Typography =========== */
 
   .layout {
@@ -95,11 +105,7 @@
 @layer utilities {
   .animated-underline {
     background-image: linear-gradient(#33333300, #33333300),
-      linear-gradient(
-        to right,
-        rgb(192 132 252),
-        rgb(192 132 252)
-      );
+      linear-gradient(to right, rgb(192 132 252), rgb(192 132 252));
     background-size: 100% 2px, 0 2px;
     background-position: 100% 100%, 0 100%;
     background-repeat: no-repeat;
@@ -112,59 +118,73 @@
     }
   }
   .animated-underline:hover,
-  .animated-underline:focus-visible, 
+  .animated-underline:focus-visible,
   .selected {
     background-size: 0 2px, 100% 2px;
   }
 
-/* Loading:Merge */
-@-webkit-keyframes grow {
-  0%, 100% {
-    -webkit-transform: scale(1);
-            transform: scale(1); }
-  50% {
-    -webkit-transform: scale(0.25);
-            transform: scale(0.25); } }
-@keyframes grow {
-  0%, 100% {
-    -webkit-transform: scale(1);
-            transform: scale(1); }
-  50% {
-    -webkit-transform: scale(0.25);
-            transform: scale(0.25); } }
+  /* Loading:Merge */
+  @-webkit-keyframes grow {
+    0%,
+    100% {
+      -webkit-transform: scale(1);
+      transform: scale(1);
+    }
+    50% {
+      -webkit-transform: scale(0.25);
+      transform: scale(0.25);
+    }
+  }
+  @keyframes grow {
+    0%,
+    100% {
+      -webkit-transform: scale(1);
+      transform: scale(1);
+    }
+    50% {
+      -webkit-transform: scale(0.25);
+      transform: scale(0.25);
+    }
+  }
 
-.merge {
-  -webkit-animation: spin 1.33333s infinite linear;
-          animation: spin 1.33333s infinite linear;
-  height: 10px;
-  position: relative;
-  width: 20px; 
-}
-  .merge:after, .merge:before {
+  .merge {
+    -webkit-animation: spin 1.33333s infinite linear;
+    animation: spin 1.33333s infinite linear;
+    height: 10px;
+    position: relative;
+    width: 20px;
+  }
+  .merge:after,
+  .merge:before {
     content: '';
     height: 40px;
     width: 40px;
     -webkit-animation: grow 2s infinite ease backwards;
-            animation: grow 2s infinite ease backwards;
+    animation: grow 2s infinite ease backwards;
     border-radius: 100%;
     background: #1e1b4b;
     opacity: 0.75;
     position: absolute;
     -webkit-transform-origin: -200% -80%;
-            transform-origin: -200% -80%; }
+    transform-origin: -200% -80%;
+  }
   .merge:before {
     background: #c084fc;
     -webkit-transform-origin: 200% 80%;
-            transform-origin: 200% 80%; }
+    transform-origin: 200% 80%;
+  }
 
-@-webkit-keyframes spin {
-  to {
-    -webkit-transform: rotate(360deg);
-            transform: rotate(360deg); } }
+  @-webkit-keyframes spin {
+    to {
+      -webkit-transform: rotate(360deg);
+      transform: rotate(360deg);
+    }
+  }
 
-@keyframes spin {
-  to {
-    -webkit-transform: rotate(360deg);
-            transform: rotate(360deg); } }
-
+  @keyframes spin {
+    to {
+      -webkit-transform: rotate(360deg);
+      transform: rotate(360deg);
+    }
+  }
 }

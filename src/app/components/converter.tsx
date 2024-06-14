@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { fetchCurrencies, fetchRates } from "@/app/api/hello/conversionRate";
 import InputContainer from "@/app/components/input/InputContainer";
+import { IConversionHistory, saveToConversionHistory } from "@/app/utils/localStorage";
 
 export interface IConversion {
   baseAmount: number;
@@ -52,6 +53,7 @@ export const Converter: React.FC<IConverterProps> = ({ selectMenu }) => {
         const rate = data.conversion_rate
         setConversionRate(rate)
 
+
         const timeUpdated = data.time_last_update_utc
         const date = new Date(timeUpdated)
         const formattedDate = date.toLocaleDateString()
@@ -64,6 +66,7 @@ export const Converter: React.FC<IConverterProps> = ({ selectMenu }) => {
           ...prevConversion,
           targetAmount: convertedAmount
         }));
+
       } catch (error) {
         console.error('Error fetching conversion rate:', error);
         setErrMsg("Don't get paid enough to afford the paid version.\nPlease try again another day :(")
@@ -73,7 +76,6 @@ export const Converter: React.FC<IConverterProps> = ({ selectMenu }) => {
     fetchCurrencyList()
     fetchConversionRates()
   }, [conversion.baseCurrency, conversion.targetCurrency]);
-
 
 
   return (

@@ -4,6 +4,7 @@ import ArrowUpDown from "../../../../public/svg/ArrowUpDown.svg"
 import ArrowRightLeft from "../../../../public/svg/ArrowRightLeft.svg"
 import { SetStateAction } from "react";
 import { flatCurrencyList } from "@/constant/flatCurrencyList";
+import { saveToConversionHistory } from "@/app/utils/localStorage";
 
 interface InputContainerProps {
   selectMenu: string;
@@ -17,7 +18,7 @@ interface InputContainerProps {
   setConversion: React.Dispatch<SetStateAction<IConversion>>
   setClickTargetCurrencyMenu: React.Dispatch<SetStateAction<boolean>>
   setClickBaseCurrencyMenu: React.Dispatch<SetStateAction<boolean>>
-  timeUpdated?: any;
+  timeUpdated: string;
 }
 
 const InputContainer: React.FC<InputContainerProps> = (
@@ -33,7 +34,6 @@ const InputContainer: React.FC<InputContainerProps> = (
     timeUpdated,
     setClickBaseCurrencyMenu
   }) => {
-
   const handleAmountBlur = (event: React.FocusEvent<HTMLInputElement>) => {
     const amount = +event.target.value;
     setConversion(prevConversion => ({
@@ -61,8 +61,37 @@ const InputContainer: React.FC<InputContainerProps> = (
     }
   };
 
+  // const handleSave = () => {
+  //   const conversionEntry: IConversionHistory = {
+  //     base: conversion.baseAmount,
+  //     from: conversion.baseCurrency,
+  //     target: conversion.targetAmount,
+  //     to: conversion.targetCurrency,
+  //     rate: conversionRate,
+  //     time: timeUpdated
+  //   };
+  //   saveToConversionHistory(conversionEntry)
+  // }
+
+  const handleSave = async () => {
+    const conversionEntry = {
+      base: conversion.baseAmount,
+      from: conversion.baseCurrency,
+      target: conversion.targetAmount,
+      to: conversion.targetCurrency,
+      rate: conversionRate,
+      time: timeUpdated,
+    };
+    try {
+      await saveToConversionHistory(conversionEntry);
+    } catch (error) {
+      console.error('Error saving conversion entry', error);
+    }
+  };
+
+
   return (
-    <section className="px-8 pt-6 pb-8 mb-4">
+    <section className="p-8 mb-4">
       {errMsg !== null || (currencyList.length > 0 && conversionRate !== 0 && errMsg == null) ? (
         <div>
           <div className="text-rose-600 mb-4 flex flex-col">
@@ -76,7 +105,7 @@ const InputContainer: React.FC<InputContainerProps> = (
                 Amount
               </label>
 
-              <div className="flex max-w-[500px]">
+              <div className="flex max-w-[500px] gap-4">
                 <input
                   className="shadow-2xl appearance-none border rounded-xl w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:border-purple-400 focus:ring-2 focus:ring-purple-400"
                   type="number"
@@ -139,7 +168,7 @@ const InputContainer: React.FC<InputContainerProps> = (
                 Converted To
               </label>
 
-              <div className="flex max-w-[500px]">
+              <div className="flex max-w-[500px] gap-4">
 
                 <input className="shadow-2xl appearance-none border rounded-xl w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="number" placeholder={conversion.targetAmount.toFixed(2).toString()} disabled />
 
@@ -193,6 +222,14 @@ const InputContainer: React.FC<InputContainerProps> = (
             </div>
           </div>
 
+          <div>
+            <button
+              className="w-[65px] mb-4 bg-purple-400 rounded-lg py-2 hover:bg-purple-500"
+              onClick={() => handleSave()}>
+              Save
+            </button>
+          </div>
+
           {conversionRate !== null && (
             <div style={{
               fontSize: '9px',
@@ -213,8 +250,9 @@ const InputContainer: React.FC<InputContainerProps> = (
         <div className="h-[150px] pt-10 flex items-center justify-center">
           <div className="merge"></div>
         </div>
-      )}
-    </section>
+      )
+      }
+    </section >
   )
 }
 
