@@ -76,12 +76,12 @@
 
   th,
   .th {
-    @apply border border-gray-300 md:px-4 md:py-2 md:text-base px-1 py-1 text-xs;
+    @apply md:px-4 md:py-2 md:text-base px-1 py-1 text-xs;
   }
 
   td,
   .td {
-    @apply border border-gray-300 md:px-2 md:py-2 md:text-base px-1 text-xs;
+    @apply md:px-2 md:py-2 md:text-base px-1 text-xs;
   }
 
   /* #endregion  /**======== Typography =========== */

@@ -34,6 +34,7 @@ const InputContainer: React.FC<InputContainerProps> = (
     timeUpdated,
     setClickBaseCurrencyMenu
   }) => {
+
   const handleAmountBlur = (event: React.FocusEvent<HTMLInputElement>) => {
     const amount = +event.target.value;
     setConversion(prevConversion => ({
@@ -61,27 +62,18 @@ const InputContainer: React.FC<InputContainerProps> = (
     }
   };
 
-  // const handleSave = () => {
-  //   const conversionEntry: IConversionHistory = {
-  //     base: conversion.baseAmount,
-  //     from: conversion.baseCurrency,
-  //     target: conversion.targetAmount,
-  //     to: conversion.targetCurrency,
-  //     rate: conversionRate,
-  //     time: timeUpdated
-  //   };
-  //   saveToConversionHistory(conversionEntry)
-  // }
 
   const handleSave = async () => {
     const conversionEntry = {
       base: conversion.baseAmount,
       from: conversion.baseCurrency,
-      target: conversion.targetAmount,
+      target: +conversion.targetAmount.toFixed(2),
       to: conversion.targetCurrency,
-      rate: conversionRate,
+      rate: +conversionRate.toFixed(2),
       time: timeUpdated,
     };
+
+
     try {
       await saveToConversionHistory(conversionEntry);
     } catch (error) {
@@ -110,7 +102,7 @@ const InputContainer: React.FC<InputContainerProps> = (
                   className="shadow-2xl appearance-none border rounded-xl w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:border-purple-400 focus:ring-2 focus:ring-purple-400"
                   type="number"
                   inputMode="numeric"
-                  pattern="[0-9]*"
+                  pattern="[0-9]*[.,]?[0-9]*"
                   placeholder={conversion.baseAmount.toString()}
                   onBlur={handleAmountBlur}
                 />
@@ -139,16 +131,19 @@ const InputContainer: React.FC<InputContainerProps> = (
                               </div>
                             </div>
                           ))}
-                        </>) : (<>
-                          {flatCurrencyList.map((currency: string) => (
-                            <div className="flex justify-center cursor-pointer hover:bg-gray-300">
-                              <img src={currenciesFlags.find(currenciesFlags => currenciesFlags.code === currency)?.flag} className="w-[32px]" />
-                              <div key={currency} className="text-gray-700 block px-4 py-2 text-sm" role="menuitem" onClick={() => handleCurrencySelect(currency, true)}>
-                                {currency}
+                        </>
+                        ) : (
+                          <>
+                            {flatCurrencyList.map((currency: string) => (
+                              <div className="flex justify-center cursor-pointer hover:bg-gray-300">
+                                <img src={currenciesFlags.find(currenciesFlags => currenciesFlags.code === currency)?.flag} className="w-[32px]" />
+                                <div key={currency} className="text-gray-700 block px-4 py-2 text-sm" role="menuitem" onClick={() => handleCurrencySelect(currency, true)}>
+                                  {currency}
+                                </div>
                               </div>
-                            </div>
-                          ))}
-                        </>)}
+                            ))}
+                          </>
+                        )}
 
                       </div>
                     </div>
