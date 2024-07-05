@@ -4,13 +4,10 @@ import defaultTheme from 'tailwindcss/defaultTheme';
 export default {
   content: ['./src/**/*.{js,jsx,ts,tsx}'],
   theme: {
-    // screens: {
-    //   tablet: '640px',
-    //   desktop: '1024px',
-    // },
     extend: {
       fontFamily: {
         primary: ['Inter', ...defaultTheme.fontFamily.sans],
+        currentFontCustom: ['CurrentFontCustom', 'sans']
       },
       colors: {
         primary: {

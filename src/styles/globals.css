@@ -49,9 +49,14 @@
     @apply font-primary text-3xl font-bold md:text-5xl;
   } */
 
+  @font-face {
+    font-family: 'CurrentFontCustom';
+    src: url('../font/Current-Regular.otf') format('truetype');
+  }
+
   h1,
   .h1 {
-    @apply font-primary text-2xl font-bold md:text-4xl;
+    @apply font-currentFontCustom text-2xl font-bold md:text-4xl;
   }
 
   h2,
@@ -61,7 +66,7 @@
 
   h3,
   .h3 {
-    @apply font-primary text-lg font-bold md:text-2xl;
+    @apply font-currentFontCustom text-lg font-bold md:text-2xl;
   }
 
   h4,
@@ -82,6 +87,10 @@
   td,
   .td {
     @apply md:px-2 md:py-2 md:text-base px-1 text-xs;
+  }
+
+  label, footer{
+    @apply font-currentFontCustom
   }
 
   /* #endregion  /**======== Typography =========== */
