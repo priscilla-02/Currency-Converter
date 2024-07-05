@@ -1,37 +1,52 @@
-import { IConversionHistory, getConversionHistory } from "@/app/utils/localStorage";
+import { IConversionHistory, deleteConversionHistory, getConversionHistory } from "@/app/utils/localStorage";
+import StyledButton from "@/reusable/buttons/styledButton";
 import { useEffect, useState } from "react";
 
 export default function SavedList() {
 
   const [list, setList] = useState<IConversionHistory[]>([])
-  const [updateList, setUpdateList] = useState<boolean>(true)
+  const [updateList, setUpdateList] = useState<boolean>(false)
+
+  console.log("list", list, list.length === 0)
 
   useEffect(() => {
     const fetchSavedData = async () => {
       try {
         const savedData = await getConversionHistory()
 
-        if (savedData && savedData.length > 0) {
+        if (savedData) {
           if (savedData.length > 10) {
             const lastTenItems = savedData.slice(savedData.length - 10);
             setTimeout(() => {
               setList(lastTenItems);
-              setUpdateList(false)
             }, 6000);
           } else {
-            setList(savedData);
-            setUpdateList(false)
+            setTimeout(() => {
+              setList(savedData);
+            }, 6000);
           }
         }
 
       } catch (error) {
         console.error('Error fetching saved list', error);
-        setUpdateList(false)
         throw error;
       }
     }
     fetchSavedData()
   }, []);
+
+
+  const handleDelete = (uuid: string | undefined) => {
+    if (uuid) {
+      deleteConversionHistory(uuid)
+      const updatedList = getConversionHistory();
+      if (updatedList) {
+        setList(updatedList);
+      }
+    }
+
+
+  }
 
 
   return (
@@ -51,10 +66,9 @@ export default function SavedList() {
 
         ) : (
           <>
-            {list.length === 0 ? (
+            {(list.length === 0) ? (
 
-              <h4>No Saved List
-              </h4>
+              <h4>No Saved List </h4>
 
             ) : (
 
@@ -76,7 +90,7 @@ export default function SavedList() {
                     </thead>
                     <tbody>
                       {list.map((item: IConversionHistory, index: number) => (
-                        <tr key={index} className="border-none">
+                        <tr key={index}>
                           <td>{index + 1}.</td>
                           <td>{item.base}</td>
                           <td>{item.from}</td>
@@ -84,6 +98,9 @@ export default function SavedList() {
                           <td>{item.to}</td>
                           <td>{item.rate}</td>
                           <td>{item.time}</td>
+                          <td>
+                            <StyledButton text="Delete" onClick={() => handleDelete(item.uuid)} />
+                          </td>
                         </tr>
                       ))}
                     </tbody>

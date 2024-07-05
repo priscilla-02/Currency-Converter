@@ -5,6 +5,7 @@ import ArrowRightLeft from "../../../../public/svg/ArrowRightLeft.svg"
 import { SetStateAction } from "react";
 import { flatCurrencyList } from "@/constant/flatCurrencyList";
 import { saveToConversionHistory } from "@/app/utils/localStorage";
+import StyledButton from "@/reusable/buttons/styledButton";
 
 interface InputContainerProps {
   selectMenu: string;
@@ -218,11 +219,7 @@ const InputContainer: React.FC<InputContainerProps> = (
           </div>
 
           <div>
-            <button
-              className="w-[65px] mb-4 bg-purple-400 rounded-lg py-2 hover:bg-purple-500"
-              onClick={() => handleSave()}>
-              Save
-            </button>
+            <StyledButton style="mb-4" text="Save" onClick={() => handleSave()} />
           </div>
 
           {conversionRate !== null && (
